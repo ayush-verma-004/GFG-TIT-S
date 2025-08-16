@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About Us | GFG TIT&S — Enhanced</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{ --brand:#2f8d46; --dark:#0f1720; }
+    html{ scroll-behavior: smooth; }
+    body{ font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial; color:#0f1720; background:#fff; }
+    h1,h2,h3{ font-family:'Montserrat',sans-serif; }
+
+    /* shared animation helpers */
+    .reveal-hidden{ opacity:0; transform: translateY(18px) scale(.995); }
+    .reveal-visible{ opacity:1; transform:none; transition: opacity .7s cubic-bezier(.2,.9,.25,1), transform .7s cubic-bezier(.2,.9,.25,1); }
+    .smooth-transition{ transition: transform .45s cubic-bezier(.2,.9,.25,1), box-shadow .35s ease, opacity .35s ease; will-change: transform, opacity; }
+    .card-hover{ transition: transform .45s cubic-bezier(.2,.9,.25,1), box-shadow .35s ease; }
+    .card-hover:hover{ transform: translateY(-8px); box-shadow: 0 18px 40px rgba(15,23,32,0.08); }
+    .focus-ring:focus{ outline: 3px solid rgba(47,141,70,0.16); outline-offset: 2px; }
+
+    /* hero decorative blob */
+    @keyframes floaty { 0%{ transform: translateY(0);} 50%{ transform: translateY(-10px);} 100%{ transform: translateY(0);} }
+    .blob{ animation: floaty 6.5s ease-in-out infinite; filter: blur(16px); opacity:.14; }
+
+    /* timeline */
+    .timeline-item{ position:relative; padding-left:48px; }
+    .timeline-item::before{ content:''; position:absolute; left:18px; top:6px; width:12px; height:12px; border-radius:999px; background:var(--brand); }
+
+    @media (prefers-reduced-motion: reduce){ .reveal-visible, .card-hover, .smooth-transition, .blob { transition:none !important; animation:none !important; transform:none !important; } }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-4">
+          <a href="./index.html" class="flex items-center gap-2 text-2xl font-bold text-gray-900">
+            <span class="inline-block rounded-md p-1 bg-gradient-to-br from-green-600 to-green-400 text-white">GFG</span>
+            <span class="hidden sm:inline">TIT&amp;S</span>
+          </a>
+          <div class="hidden md:flex md:ml-6 space-x-6 items-center">
+            <a href="./index.html" class="text-sm font-semibold text-gray-600 hover:text-[color:var(--brand)]">Home</a>
+            <a href="./about.html" class="text-sm text-[color:var(--brand)] font-bold">About</a>
+            <a href="./events.html" class="text-sm text-gray-600 hover:text-[color:var(--brand)]">Events</a>
+            <a href="./team.html" class="text-sm text-gray-600 hover:text-[color:var(--brand)]">Team</a>
+            <a href="./resources.html" class="text-sm text-gray-600 hover:text-[color:var(--brand)]">Resources</a>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="https://chat.whatsapp.com/HSOZDMimvhjKvP53LHSrnj" target="_blank" class="hidden sm:inline-block bg-[color:var(--brand)] text-white font-semibold py-2 px-4 rounded-lg focus-ring">Join Us</a>
+
+          <button id="menuBtn" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:bg-gray-100 focus-ring">
+            <svg id="menuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
+            <svg id="menuClose" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobileMenu" class="md:hidden mt-2 hidden">
+        <div class="px-2 pb-4 space-y-1">
+          <a href="./index.html" class="block px-3 py-2 rounded-md text-base font-medium text-[color:var(--brand)]">Home</a>
+          <a href="./about.html" class="block px-3 py-2 rounded-md text-base text-[color:var(--brand)]">About</a>
+          <a href="./events.html" class="block px-3 py-2 rounded-md text-base text-gray-600 hover:text-[color:var(--brand)]">Events</a>
+          <a href="./team.html" class="block px-3 py-2 rounded-md text-base text-gray-600 hover:text-[color:var(--brand)]">Team</a>
+          <a href="./resources.html" class="block px-3 py-2 rounded-md text-base text-gray-600 hover:text-[color:var(--brand)]">Resources</a>
+          <a href="https://chat.whatsapp.com/HSOZDMimvhjKvP53LHSrnj" target="_blank" class="block px-3 py-2 rounded-md text-base font-semibold bg-[color:var(--brand)] text-white">Join Us</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-[color:var(--dark)] text-white">
+      <div class="absolute inset-0 -z-10 pointer-events-none">
+        <svg class="blob absolute top-[-6rem] left-[-8rem] w-[44rem] h-[44rem]" viewBox="0 0 600 600"><g transform="translate(300,300)"><path d="M120,-173C163,-129,190,-81,190,-31C190,18,163,67,120,106C77,144,18,172,-34,175C-86,177,-171,154,-201,101C-230,48,-205,-36,-168,-88C-130,-140,-80,-160,-30,-183C20,-206,80,-233,120,-173Z" fill="#165e2f"/></g></svg>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 py-20 sm:py-28 lg:py-32">
+        <div class="max-w-3xl mx-auto text-center reveal-hidden" data-reveal>
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">About the GFG Student Chapter — TIT&amp;S</h1>
+          <p class="mt-4 text-lg sm:text-xl text-gray-200">A student-first community building technical skills, projects and career-ready engineers.</p>
+          <div class="mt-8 flex items-center justify-center gap-3">
+            <a href="./team.html" class="px-4 py-2 rounded-full bg-white text-[color:var(--brand)] font-semibold focus-ring">Meet Our Team</a>
+            <a href="./events.html" class="px-4 py-2 rounded-full bg-[color:var(--brand)] text-white font-semibold">See Events</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission / Vision -->
+    <section class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+        <div class="reveal-hidden" data-reveal>
+          <h2 class="text-3xl font-bold">Our Mission &amp; Vision</h2>
+          <p class="mt-4 text-lg text-gray-600">We exist to create a dynamic and inclusive coding culture at TIT&amp;S, bridging the gap between theory and practice. Our goal is to empower students with practical skills, mentorship and opportunities to build real-world projects.</p>
+
+          <ul class="mt-6 space-y-3 text-gray-600">
+            <li>• Hands-on workshops and project-based learning.</li>
+            <li>• Competitive programming and interview prep.</li>
+            <li>• Industry connect, internships, and career guidance.</li>
+          </ul>
+
+          <div class="mt-6 flex gap-3">
+            <a href="#contact" class="px-4 py-2 rounded-md bg-[color:var(--brand)] text-white font-semibold">Join the Chapter</a>
+            <a href="#values" class="px-4 py-2 rounded-md border text-[color:var(--brand)]">Our Values</a>
+          </div>
+        </div>
+
+        <div class="reveal-hidden" data-reveal>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80" alt="Team collaborating" class="rounded-2xl shadow-xl" />
+        </div>
+      </div>
+    </section>
+
+    <!-- What we do (cards) -->
+    <section class="bg-gray-50 py-16">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center reveal-hidden" data-reveal>What We Do</h2>
+        <p class="mt-2 text-center text-gray-600 reveal-hidden" data-reveal>Workshops, contests, mentorship and community projects — all designed for learning by doing.</p>
+
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 bg-white rounded-2xl shadow-md card-hover reveal-hidden" data-reveal>
+            <h3 class="text-xl font-bold">Workshops &amp; Seminars</h3>
+            <p class="mt-3 text-gray-600">Hands-on workshops on Web, ML, Cloud and more — with labs and project templates.</p>
+          </div>
+          <div class="p-6 bg-white rounded-2xl shadow-md card-hover reveal-hidden" data-reveal>
+            <h3 class="text-xl font-bold">Coding Contests</h3>
+            <p class="mt-3 text-gray-600">Regular competitive programming rounds and community challenges to sharpen problem solving.</p>
+          </div>
+          <div class="p-6 bg-white rounded-2xl shadow-md card-hover reveal-hidden" data-reveal>
+            <h3 class="text-xl font-bold">Project Mentorship</h3>
+            <p class="mt-3 text-gray-600">Mentors guide student teams to build portfolio projects and open-source contributions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline / Milestones -->
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center reveal-hidden" data-reveal>Our Journey</h2>
+        <p class="mt-3 text-center text-gray-600 reveal-hidden" data-reveal>Highlights from the chapter's growth and impact.</p>
+
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="reveal-hidden" data-reveal>
+            <div class="timeline-item p-4 bg-white rounded-2xl shadow-md">
+              <h4 class="font-bold">Founded — 2019</h4>
+              <p class="mt-2 text-gray-600">Chapter established with the goal of helping students learn practical skills beyond the classroom.</p>
+            </div>
+            <div class="timeline-item p-4 mt-4 bg-white rounded-2xl shadow-md">
+              <h4 class="font-bold">First Hackathon — 2021</h4>
+              <p class="mt-2 text-gray-600">Hosted our first campus hackathon with 120+ participants and multiple sponsor prizes.</p>
+            </div>
+            <div class="timeline-item p-4 mt-4 bg-white rounded-2xl shadow-md">
+              <h4 class="font-bold">Community Growth — 2024</h4>
+              <p class="mt-2 text-gray-600">Reached 500+ active members and launched our mentorship squads.</p>
+            </div>
+          </div>
+
+          <div class="reveal-hidden" data-reveal>
+            <div class="p-6 bg-[color:var(--brand)] text-white rounded-2xl shadow-lg">
+              <h3 class="text-2xl font-bold">Impact</h3>
+              <p class="mt-3">500+ members • 50+ events • 10+ workshops — students placed in internships and full-time roles with club support.</p>
+              <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div class="text-2xl font-extrabold">500+</div>
+                  <div class="text-sm opacity-90">Members</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-extrabold">50+</div>
+                  <div class="text-sm opacity-90">Events</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-extrabold">10+</div>
+                  <div class="text-sm opacity-90">Workshops</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section id="values" class="bg-gray-50 py-12">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center reveal-hidden" data-reveal>Our Values</h2>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 bg-white rounded-2xl shadow-md reveal-hidden" data-reveal>
+            <h4 class="font-bold">Collaborative</h4>
+            <p class="mt-2 text-gray-600">We learn together and lift each other up — projects are team-first.</p>
+          </div>
+          <div class="p-6 bg-white rounded-2xl shadow-md reveal-hidden" data-reveal>
+            <h4 class="font-bold">Inclusive</h4>
+            <p class="mt-2 text-gray-600">Open to beginners and experts alike — mentorship over competition.</p>
+          </div>
+          <div class="p-6 bg-white rounded-2xl shadow-md reveal-hidden" data-reveal>
+            <h4 class="font-bold">Practical</h4>
+            <p class="mt-2 text-gray-600">We prioritize hands-on learning and building useful projects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / Contact -->
+    <section id="contact" class="py-12 bg-[color:var(--brand)] text-white">
+      <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h3 class="text-lg font-bold">Want to collaborate or sponsor?</h3>
+          <p class="text-sm opacity-90">Email us at <a href="mailto:gfg.tits@example.com" class="underline">gfg.tits@example.com</a></p>
+        </div>
+        <div class="flex gap-3">
+          <a href="mailto:gfg.tits@example.com" class="bg-white text-[color:var(--brand)] font-semibold px-4 py-2 rounded-md focus-ring">Email</a>
+          <a href="https://chat.whatsapp.com/HSOZDMimvhjKvP53LHSrnj" target="_blank" class="bg-white/10 border border-white/20 px-4 py-2 rounded-md hover:bg-white/20">WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[color:var(--dark)] text-white mt-12">
+    <div class="max-w-7xl mx-auto px-6 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold">GFG Student Chapter TIT&amp;S</h3>
+          <p class="mt-2 text-gray-400">The Technological Institute of Textile &amp; Sciences, Bhiwani</p>
+        </div>
+        <div>
+          <h3 class="font-bold mb-2">Quick Links</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="./team.html" class="hover:text-white">Team</a></li>
+            <li><a href="./events.html" class="hover:text-white">Events</a></li>
+            <li><a href="https://chat.whatsapp.com/HSOZDMimvhjKvP53LHSrnj" target="_blank" class="hover:text-white">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold mb-2">Connect With Us</h3>
+          <div class="flex space-x-4 mt-2">
+            <a href="#" class="text-gray-400 hover:text-white" aria-label="LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.206v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433c-.945 0-1.71-.765-1.71-1.71s.765-1.71 1.71-1.71 1.71.765 1.71 1.71-.765 1.71-1.71 1.71zM6.61 16.338H4.064v-8.59h2.546v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z"></path></svg></a>
+            <a href="#" class="text-gray-400 hover:text-white" aria-label="GitHub"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12.014c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"></path></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 border-t border-gray-700 pt-6 text-center text-gray-400">
+        <p>&copy; 2025 GeeksforGeeks Student Chapter TIT&amp;S. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // menu toggle (same pattern)
+    (function(){
+      const btn = document.getElementById('menuBtn');
+      const mobile = document.getElementById('mobileMenu');
+      const openIcon = document.getElementById('menuOpen');
+      const closeIcon = document.getElementById('menuClose');
+      if(btn) btn.addEventListener('click', ()=>{ const expanded = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!expanded)); mobile.classList.toggle('hidden'); openIcon.classList.toggle('hidden'); closeIcon.classList.toggle('hidden'); });
+    })();
+
+    // reveal on scroll
+    (function(){
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealEls = document.querySelectorAll('[data-reveal]');
+      if(prefersReduced){ revealEls.forEach(el=>el.classList.add('reveal-visible')); return; }
+      const obs = new IntersectionObserver((entries, observer)=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('reveal-visible'); entry.target.classList.remove('reveal-hidden'); observer.unobserve(entry.target); } }); }, { rootMargin:'0px 0px -8% 0px', threshold:0.08 });
+      revealEls.forEach(el=>{ el.classList.add('reveal-hidden'); obs.observe(el); });
+    })();
+
+  </script>
+</body>
+</html>

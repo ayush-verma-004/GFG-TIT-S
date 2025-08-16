@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GeeksforGeeks Student Chapter | TIT&S — Enhanced</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand: #2f8d46;
+      --dark: #0f1720;
+      --muted: #6b7280;
+      --glass: rgba(255,255,255,0.06);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: #fff; color:#0f1720; }
+    h1,h2,h3,h4 { font-family: 'Montserrat', 'Inter', sans-serif; }
+
+    /* Smooth utility for GPU acceleration and nicer easing */
+    .smooth-transition { transition: transform .45s cubic-bezier(.2,.9,.25,1), opacity .45s cubic-bezier(.2,.9,.25,1), box-shadow .35s ease; will-change: transform, opacity; }
+
+    /* reveal animation base state */
+    .reveal-hidden { opacity:0; transform: translateY(18px) scale(.995); }
+    .reveal-visible { opacity:1; transform: translateY(0) scale(1); transition: opacity .7s cubic-bezier(.2,.9,.25,1), transform .7s cubic-bezier(.2,.9,.25,1); }
+
+    /* Stagger helper (JS sets style.transitionDelay) */
+
+    /* Glass card */
+    .glass { background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); backdrop-filter: blur(6px); }
+
+    /* Gradient border (subtle) */
+    .gradient-border { position: relative; }
+    .gradient-border::before { content: ''; position: absolute; inset: -1px; background: linear-gradient(90deg, rgba(47,141,70,0.14), rgba(47,141,70,0.06)); z-index: -1; border-radius: inherit; }
+
+    /* Hero blob animation */
+    @keyframes floaty { 0%{ transform: translateY(0) rotate(0deg) scale(1); } 50%{ transform: translateY(-12px) rotate(6deg) scale(1.03);} 100%{ transform: translateY(0) rotate(0deg) scale(1);} }
+    .blob { animation: floaty 6.5s ease-in-out infinite; filter: blur(18px) saturate(120%); opacity:.16; }
+
+    /* image overlay hover */
+    .img-tilt { transform-origin: center; }
+    .img-tilt:hover { transform: translateY(-6px) scale(1.02) rotate(-0.25deg); }
+
+    /* focus ring */
+    .focus-ring:focus { outline: 3px solid rgba(47,141,70,0.18); outline-offset: 2px; }
+
+    /* subtle separator wave */
+    .divider-wave { display:block; width:100%; height:64px; }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-visible, .blob, .img-tilt, .smooth-transition { transition: none !important; animation: none !important; transform: none !important; }
+    }
+
+    /* small devices tweak for larger tap targets */
+    @media (max-width:640px) {
+      .cta-group a { width:100%; text-align:center; }
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-4">
+          <a href="./index.html" class="flex items-center gap-2 text-2xl font-bold text-gray-900">
+            <span class="inline-block rounded-md p-1 bg-gradient-to-br from-green-600 to-green-400 text-white">GFG</span>
+            <span class="hidden sm:inline">TIT&amp;S</span>
+          </a>
+          <div class="hidden md:flex md:ml-6 space-x-6 items-center">
+            <a href="./index.html" class="text-sm font-semibold text-[color:var(--brand)]">Home</a>
+            <a href="./about.html" class="text-sm text-gray-600 hover:text-[color:var(--brand)] transition-colors">About</a>
+            <a href="./events.html" class="text-sm text-gray-600 hover:text-[color:var(--brand)] transition-colors">Events</a>
+            <a href="./team.html" class="text-sm text-gray-600 hover:text-[color:var(--brand)] transition-colors">Team</a>
+            <a href="./resources.html" class="text-sm text-gray-600 hover:text-[color:var(--brand)] transition-colors">Resources</a>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="https://chat.whatsapp.com/HSOZDMimvhjKvP53LHSrnj" target="_blank" class="hidden sm:inline-block bg-[color:var(--brand)] text-white font-semibold py-2 px-4 rounded-lg hover:scale-102 transform transition duration-250 focus-ring">Join Us</a>
+
+          <!-- Mobile menu button -->
+          <button id="menuBtn" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:bg-gray-100 focus-ring">
+            <svg id="menuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
+            <svg id="menuClose" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="md:hidden mt-2 hidden">
+        <div class="px-2 pb-4 space-y-1">
+          <a href="./index.html" class="block px-3 py-2 rounded-md text-base font-medium text-[color:var(--brand)]">Home</a>
+          <a href="./about.html" class="block px-3 py-2 rounded-md text-base text-gray-600 hover:text-[color:var(--brand)]">About</a>
+          <a href="./events.html" class="block px-3 py-2 rounded-md text-base text-gray-600 hover:text-[color:var(--brand)]">Events</a>
+          <a href="./team.html" class="block px-3 py-2 rounded-md text-base text-gray-600 hover:text-[color:var(--brand)]">Team</a>
+          <a href="./resources.html" class="block px-3 py-2 rounded-md text-base text-gray-600 hover:text-[color:var(--brand)]">Resources</a>
+          <a href="https://chat.whatsapp.com/HSOZDMimvhjKvP53LHSrnj" target="_blank" class="block px-3 py-2 rounded-md text-base font-semibold bg-[color:var(--brand)] text-white">Join Us</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="relative overflow-hidden bg-[color:var(--dark)] text-white">
+
+      <!-- animated decorative blobs -->
+      <div aria-hidden="true" class="absolute inset-0 -z-10 pointer-events-none">
+        <svg class="blob absolute top-[-6rem] left-[-8rem] w-[44rem] h-[44rem] opacity-70" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg"><g transform="translate(300,300)"><path d="M120,-173C163,-129,190,-81,190,-31C190,18,163,67,120,106C77,144,18,172,-34,175C-86,177,-171,154,-201,101C-230,48,-205,-36,-168,-88C-130,-140,-80,-160,-30,-183C20,-206,80,-233,120,-173Z" fill="#1b5f2a"/></g></svg>
+        <svg class="blob absolute bottom-[-8rem] right-[-6rem] w-[36rem] h-[36rem] opacity-60" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg"><g transform="translate(300,300)"><path d="M120,-173C163,-129,190,-81,190,-31C190,18,163,67,120,106C77,144,18,172,-34,175C-86,177,-171,154,-201,101C-230,48,-205,-36,-168,-88C-130,-140,-80,-160,-30,-183C20,-206,80,-233,120,-173Z" fill="#0b8a3c"/></g></svg>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 py-20 sm:py-28 lg:py-36">
+        <div class="max-w-3xl mx-auto text-center reveal-hidden" data-reveal data-delay="80">
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">GeeksforGeeks Student Chapter <span class="text-[color:var(--brand)]">TIT&amp;S</span></h1>
+          <p class="mt-4 text-lg sm:text-xl text-gray-200">Learn. Code. Grow. Together.</p>
+
+          <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 cta-group">
+            <a href="./events.html" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[color:var(--brand)] text-white font-bold text-lg shadow-lg smooth-transition transform hover:-translate-y-1 focus-ring">Upcoming Events</a>
+            <a href="https://chat.whatsapp.com/HSOZDMimvhjKvP53LHSrnj" target="_blank" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-white text-white font-semibold smooth-transition hover:bg-white hover:text-black focus-ring">Become a Member</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- wave divider -->
+      <svg class="divider-wave" viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,64 C240,0 480,0 720,32 C960,64 1200,64 1440,32 L1440,64 L0,64 Z" fill="#f8fafc"/></svg>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-6 text-center reveal-hidden" data-reveal data-delay="120">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-800">Fostering a Culture of Code</h2>
+        <p class="mt-4 text-base sm:text-lg text-gray-600">The GeeksforGeeks Student Chapter at TIT&amp;S is a community of passionate student developers. Our mission is to provide a platform for peers to learn new technologies, improve their coding skills, and prepare for careers in the tech industry.</p>
+        <a href="./about.html" class="mt-6 inline-block text-[color:var(--brand)] font-bold text-lg hover:underline focus-ring">Learn More About Us &rarr;</a>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="bg-gray-50 py-12 sm:py-16 lg:py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-8 reveal-hidden" data-reveal data-delay="160">Upcoming Events</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <article class="bg-white rounded-2xl shadow-md overflow-hidden transform transition duration-500 hover:-translate-y-4 hover:shadow-2xl gradient-border reveal-hidden" data-reveal data-delay="200">
+            <div class="relative overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1542744095-291d1f67b221?auto=format&fit=crop&w=1600&q=80" alt="Workshop event" class="w-full h-44 object-cover img-tilt smooth-transition">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity"></div>
+            </div>
+            <div class="p-5">
+              <p class="text-sm text-gray-500 mb-2">Sep 15, 2025</p>
+              <h3 class="text-lg font-bold mb-2">Web Development Bootcamp</h3>
+              <p class="text-gray-600 mb-4 text-sm">Join our week-long bootcamp to master the fundamentals of modern web development with React and Node.js.</p>
+              <a href="./events.html" class="inline-block bg-[color:var(--brand)] text-white font-semibold py-2 px-4 rounded-md hover:bg-green-700 transition-colors">View Details</a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="bg-white rounded-2xl shadow-md overflow-hidden transform transition duration-500 hover:-translate-y-4 hover:shadow-2xl gradient-border reveal-hidden" data-reveal data-delay="240">
+            <div class="relative overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=80" alt="Coding contest" class="w-full h-44 object-cover img-tilt smooth-transition">
+            </div>
+            <div class="p-5">
+              <p class="text-sm text-gray-500 mb-2">Oct 05, 2025</p>
+              <h3 class="text-lg font-bold mb-2">CodeSprint 4.0</h3>
+              <p class="text-gray-600 mb-4 text-sm">Test your DSA skills in our flagship annual competitive programming contest. Exciting prizes to be won!</p>
+              <a href="./events.html" class="inline-block bg-[color:var(--brand)] text-white font-semibold py-2 px-4 rounded-md hover:bg-green-700 transition-colors">View Details</a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="bg-white rounded-2xl shadow-md overflow-hidden transform transition duration-500 hover:-translate-y-4 hover:shadow-2xl gradient-border reveal-hidden" data-reveal data-delay="280">
+            <div class="relative overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80" alt="Tech talk" class="w-full h-44 object-cover img-tilt smooth-transition">
+            </div>
+            <div class="p-5">
+              <p class="text-sm text-gray-500 mb-2">Oct 20, 2025</p>
+              <h3 class="text-lg font-bold mb-2">Tech Talk: Intro to AI/ML</h3>
+              <p class="text-gray-600 mb-4 text-sm">An expert from the industry will walk us through the basics of Artificial Intelligence and Machine Learning.</p>
+              <a href="./events.html" class="inline-block bg-[color:var(--brand)] text-white font-semibold py-2 px-4 rounded-md hover:bg-green-700 transition-colors">View Details</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="bg-[color:var(--dark)] text-white py-12 sm:py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+          <div class="reveal-hidden" data-reveal data-delay="320">
+            <h3 class="text-4xl sm:text-5xl font-extrabold text-[color:var(--brand)] stat-num" data-target="500">0+</h3>
+            <p class="mt-2 text-sm sm:text-lg font-semibold text-gray-300">Community Members</p>
+          </div>
+          <div class="reveal-hidden" data-reveal data-delay="360">
+            <h3 class="text-4xl sm:text-5xl font-extrabold text-[color:var(--brand)] stat-num" data-target="50">0+</h3>
+            <p class="mt-2 text-sm sm:text-lg font-semibold text-gray-300">Events Hosted</p>
+          </div>
+          <div class="reveal-hidden" data-reveal data-delay="400">
+            <h3 class="text-4xl sm:text-5xl font-extrabold text-[color:var(--brand)] stat-num" data-target="10">0+</h3>
+            <p class="mt-2 text-sm sm:text-lg font-semibold text-gray-300">Workshops Conducted</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESOURCES -->
+    <section class="py-14 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-8 reveal-hidden" data-reveal data-delay="440">Learn From Our Resources</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="bg-white rounded-xl border border-gray-200 overflow-hidden p-6 reveal-hidden gradient-border" data-reveal data-delay="480">
+            <span class="text-sm font-semibold text-[color:var(--brand)]">INTERVIEW PREP</span>
+            <h3 class="text-lg font-bold my-2">Cracking the Technical Interview: A Senior's Guide</h3>
+            <p class="text-gray-600 mb-4 text-sm">Learn from the experience of a recent TIT&amp;S graduate who landed a dream job.</p>
+            <a href="./resources.html" class="font-bold text-[color:var(--brand)] hover:underline">Read More &rarr;</a>
+          </article>
+
+          <article class="bg-white rounded-xl border border-gray-200 overflow-hidden p-6 reveal-hidden gradient-border" data-reveal data-delay="520">
+            <span class="text-sm font-semibold text-[color:var(--brand)]">WEB DEVELOPMENT</span>
+            <h3 class="text-lg font-bold my-2">Getting Started with Git &amp; GitHub</h3>
+            <p class="text-gray-600 mb-4 text-sm">A step-by-step tutorial for beginners to master version control for their projects.</p>
+            <a href="./resources.html" class="font-bold text-[color:var(--brand)] hover:underline">Read More &rarr;</a>
+          </article>
+
+          <article class="bg-white rounded-xl border border-gray-200 overflow-hidden p-6 reveal-hidden gradient-border" data-reveal data-delay="560">
+            <span class="text-sm font-semibold text-[color:var(--brand)]">DATA STRUCTURES</span>
+            <h3 class="text-lg font-bold my-2">Understanding Recursion with Simple Examples</h3>
+            <p class="text-gray-600 mb-4 text-sm">Break down one of the trickiest concepts in programming with our easy-to-follow guide.</p>
+            <a href="./resources.html" class="font-bold text-[color:var(--brand)] hover:underline">Read More &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[color:var(--dark)] text-white">
+    <div class="max-w-7xl mx-auto px-6 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold">GFG Student Chapter TIT&amp;S</h3>
+          <p class="mt-2 text-gray-400">The Technological Institute of Textile &amp; Sciences, Bhiwani</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold mb-2">Quick Links</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="./about.html" class="hover:text-white">About Us</a></li>
+            <li><a href="./events.html" class="hover:text-white">Events</a></li>
+            <li><a href="https://chat.whatsapp.com/HSOZDMimvhjKvP53LHSrnj" target="_blank" class="hover:text-white">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-bold mb-2">Connect With Us</h3>
+          <div class="flex space-x-4 mt-2">
+            <a href="#" class="text-gray-400 hover:text-white" aria-label="LinkedIn">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.206v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433c-.945 0-1.71-.765-1.71-1.71s.765-1.71 1.71-1.71 1.71.765 1.71 1.71-.765 1.71-1.71 1.71zM6.61 16.338H4.064v-8.59h2.546v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z"></path></svg>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white" aria-label="GitHub">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12.014c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 border-t border-gray-700 pt-6 text-center text-gray-400">
+        <p>&copy; 2025 GeeksforGeeks Student Chapter TIT&amp;S. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS: menu toggle, reveal-on-scroll with stagger, stat counters, small parallax -->
+  <script>
+    // MENU TOGGLE
+    (function() {
+      const btn = document.getElementById('menuBtn');
+      const mobile = document.getElementById('mobileMenu');
+      const openIcon = document.getElementById('menuOpen');
+      const closeIcon = document.getElementById('menuClose');
+
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        mobile.classList.toggle('hidden');
+        openIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+      });
+    })();
+
+    // REVEAL ON SCROLL WITH STAGGER
+    (function(){
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealEls = document.querySelectorAll('[data-reveal]');
+      if(prefersReduced){ revealEls.forEach(el => el.classList.add('reveal-visible')); return; }
+
+      const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            const el = entry.target;
+            const delay = el.getAttribute('data-delay') || 0;
+            el.style.transitionDelay = (delay/1000) + 's';
+            el.classList.add('reveal-visible');
+            el.classList.remove('reveal-hidden');
+            observer.unobserve(el);
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      revealEls.forEach(el => { el.classList.add('reveal-hidden'); obs.observe(el); });
+    })();
+
+    // STAT COUNTERS
+    (function(){
+      const counters = document.querySelectorAll('.stat-num[data-target]');
+      if(!counters.length) return;
+      const run = (el) => {
+        const target = +el.getAttribute('data-target');
+        const duration = 1200;
+        const start = 0;
+        let rafId;
+        const startTime = performance.now();
+        const step = (now) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const value = Math.floor(eased * (target - start) + start);
+          el.textContent = value + '+';
+          if(progress < 1) rafId = requestAnimationFrame(step);
+          else { el.textContent = target + '+'; cancelAnimationFrame(rafId); }
+        };
+        rafId = requestAnimationFrame(step);
+      };
+
+      const io = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){ run(entry.target); observer.unobserve(entry.target); }
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(c => io.observe(c));
+    })();
+
+    // SUBTLE HERO PARALLAX BASED ON MOUSE (RESPECTS REDUCED MOTION)
+    (function(){
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const hero = document.querySelector('main > section');
+      if(!hero) return;
+      const blobs = document.querySelectorAll('.blob');
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const mx = (e.clientX - rect.left) / rect.width - 0.5; // -0.5..0.5
+        const my = (e.clientY - rect.top) / rect.height - 0.5;
+        blobs.forEach((b, i) => {
+          const depth = (i+1) * 8; // px
+          b.style.transform = `translate3d(${mx * depth}px, ${my * depth}px, 0) rotate(${mx * 6}deg)`;
+        });
+      });
+      hero.addEventListener('mouseleave', () => blobs.forEach(b => b.style.transform = 'translate3d(0,0,0)'));
+    })();
+
+  </script>
+</body>
+</html>
