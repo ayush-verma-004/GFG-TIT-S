@@ -3,26 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Core Team | GFG TIT&S — 2025</title>
+  <title>Core Team & Contributors | GFG TIT&S — 2025</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{ --brand:#2f8d46; --dark:#0f1720; }
+    html{ scroll-behavior:smooth }
     body{ font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#0f1720; background:#fff; }
     h1,h2,h3{ font-family: 'Montserrat', sans-serif; }
+
+    /* reveal helpers (animation added only if JS runs) */
     .reveal-hidden{ opacity:0; transform: translateY(18px) scale(.995); }
     .reveal-visible{ opacity:1; transform:none; transition: opacity .7s cubic-bezier(.2,.9,.25,1), transform .7s cubic-bezier(.2,.9,.25,1); }
+
     .card-hover{ transition: transform .45s cubic-bezier(.2,.9,.25,1), box-shadow .35s ease; will-change: transform, box-shadow; }
-    .card-hover:hover{ transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(15,23,32,0.12); }
+    .card-hover:hover{ transform: translateY(-10px) scale(1.02); box-shadow: 0 26px 60px rgba(15,23,32,0.14); }
+
     .focus-ring:focus{ outline: 3px solid rgba(47,141,70,0.16); outline-offset: 2px; }
-    @media (prefers-reduced-motion: reduce){ .reveal-visible, .card-hover { transition: none !important; transform: none !important; } }
+    .badge { background: rgba(47,141,70,0.12); color: var(--brand); padding:6px 8px; border-radius:999px; font-size:12px; font-weight:600; }
+    .small-meta { font-size:13px; color:#6b7280; }
+
+    @media (prefers-reduced-motion: reduce){
+      .reveal-visible, .card-hover { transition:none !important; transform:none !important; }
+    }
+
+    /* ensure content visible even if JS fails */
+    .no-js-reveals .reveal-visible,
+    .no-js-reveals .reveal-hidden { opacity:1 !important; transform:none !important; }
   </style>
 </head>
 <body class="bg-white text-gray-900">
 
-  <!-- header (same style as landing) -->
+  <!-- Header -->
   <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md shadow-sm">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
       <div class="flex items-center justify-between h-16">
@@ -66,108 +80,159 @@
   <main class="overflow-x-hidden">
 
     <!-- hero -->
-    <section class="bg-gray-50 py-12 sm:py-16">
-      <div class="max-w-6xl mx-auto px-6 text-center reveal-hidden" data-reveal>
-        <h1 class="text-4xl sm:text-5xl font-extrabold">Core Committee — 2025 &#x2013; 26</h1>
-        <p class="mt-3 text-gray-600">Meet the students steering the chapter. Click any profile to view contact links &amp; short bio.</p>
+    <section class="bg-gray-50 py-10">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <h1 class="text-3xl sm:text-4xl font-extrabold">Core Committee — 2025 &mdash; 26</h1>
+        <p class="mt-2 text-gray-600">Meet the students steering the chapter and the contributors who helped make things happen.</p>
       </div>
     </section>
 
-    <!-- team grid -->
-    <section class="py-12">
+    <!-- Core team grid -->
+    <section class="py-8">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-6">Core Committee</h2>
 
-          <!-- Card template start -->
+        <div id="teamGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 
-          <!-- 1 Priya -->
-          <article class="bg-white rounded-2xl p-6 text-center card-hover reveal-hidden" data-reveal data-person="priya">
-            <img class="w-32 h-32 rounded-full mx-auto shadow-lg" src="https://ui-avatars.com/api/?name=Priya+Patel&background=2f8d46&color=fff&size=256" alt="Priya Patel">
-            <h3 class="mt-4 text-xl font-bold">Priya Patel</h3>
-            <p class="text-sm text-gray-500">President</p>
-            <p class="mt-3 text-sm text-gray-600">Computer Science — final year. Focus: outreach, partnerships &amp; strategy.</p>
+          <!-- NOTE: no 'reveal-hidden' on these by default so they are visible immediately -->
+          <article class="bg-white rounded-2xl p-8 text-center card-hover" data-person="farid">
+            <img class="w-40 h-40 rounded-full mx-auto shadow-lg object-cover" src="https://ui-avatars.com/api/?name=Md+Farid&background=2f8d46&color=fff&size=512" alt="Md Farid — Leader" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Md+Farid&background=2f8d46&color=fff'">
+            <h3 class="mt-4 text-2xl font-bold">Md Farid</h3>
+            <p class="text-sm text-gray-500">Leader</p>
+            <p class="mt-3 text-sm text-gray-600">Guides the team with vision and strategy to achieve collective goals. Builds partnerships and mentors the core committee.</p>
             <div class="mt-4 flex items-center justify-center gap-3">
-              <a class="p-2 rounded-md focus-ring" href="https://github.com/priyapatel" target="_blank" aria-label="Priya GitHub">
-                <svg class="w-5 h-5 text-gray-700 hover:text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12.014c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"/></svg>
-              </a>
-              <a class="p-2 rounded-md focus-ring" href="https://www.linkedin.com/in/priyapatel" target="_blank" aria-label="Priya LinkedIn">
-                <svg class="w-5 h-5 text-gray-700 hover:text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.206v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433c-.945 0-1.71-.765-1.71-1.71s.765-1.71 1.71-1.71 1.71.765 1.71 1.71-.765 1.71-1.71 1.71zM6.61 16.338H4.064v-8.59h2.546v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z"/></svg>
-              </a>
+              <a class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 text-sm" href="mailto:md.farid@example.com">✉️ Email</a>
+              <span class="badge">2025</span>
             </div>
-            <button class="mt-4 inline-block px-4 py-2 bg-[color:var(--brand)] text-white rounded-md focus-ring view-profile" data-person="priya">View Profile</button>
+            <div class="mt-4 flex items-center justify-center gap-3">
+              <a class="p-2 rounded-md text-sm" href="#" target="_blank" aria-label="Farid GitHub">GitHub</a>
+              <a class="p-2 rounded-md text-sm" href="#" target="_blank" aria-label="Farid LinkedIn">LinkedIn</a>
+            </div>
+            <div class="mt-4">
+              <button class="inline-block px-5 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="farid">View Profile</button>
+            </div>
           </article>
 
-          <!-- 2 Rohan -->
-          <article class="bg-white rounded-2xl p-6 text-center card-hover reveal-hidden" data-reveal data-person="rohan">
-            <img class="w-32 h-32 rounded-full mx-auto shadow-lg" src="https://ui-avatars.com/api/?name=Rohan+Verma&background=2f8d46&color=fff&size=256" alt="Rohan Verma">
-            <h3 class="mt-4 text-xl font-bold">Rohan Verma</h3>
-            <p class="text-sm text-gray-500">Vice President</p>
-            <p class="mt-3 text-sm text-gray-600">Electronics — growth, partnerships &amp; mentorship programs.</p>
-            <div class="mt-4 flex items-center justify-center gap-3">
-              <a class="p-2 rounded-md" href="https://github.com/rohanverma" target="_blank" aria-label="Rohan GitHub"><svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12.014c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"/></svg></a>
-              <a class="p-2 rounded-md" href="https://www.linkedin.com/in/rohanverma" target="_blank" aria-label="Rohan LinkedIn"><svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.206v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433c-.945 0-1.71-.765-1.71-1.71s.765-1.71 1.71-1.71 1.71.765 1.71 1.71-.765 1.71-1.71 1.71zM6.61 16.338H4.064v-8.59h2.546v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z"/></svg></a>
-            </div>
-            <button class="mt-4 inline-block px-4 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="rohan">View Profile</button>
-          </article>
-
-          <!-- 3 Anjali -->
-          <article class="bg-white rounded-2xl p-6 text-center card-hover reveal-hidden" data-reveal data-person="anjali">
-            <img class="w-32 h-32 rounded-full mx-auto shadow-lg" src="https://ui-avatars.com/api/?name=Anjali+Mehta&background=2f8d46&color=fff&size=256" alt="Anjali Mehta">
-            <h3 class="mt-4 text-xl font-bold">Anjali Mehta</h3>
+          <article class="bg-white rounded-2xl p-8 text-center card-hover" data-person="ayush">
+            <img class="w-40 h-40 rounded-full mx-auto shadow-lg object-cover" src="one.webp" alt="Ayush Verma — Technical Head" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Ayush+Verma&background=2f8d46&color=fff'">
+            <h3 class="mt-4 text-2xl font-bold">Ayush Verma</h3>
             <p class="text-sm text-gray-500">Technical Head</p>
-            <p class="mt-3 text-sm text-gray-600">Backend &amp; DevOps — leads technical workshops &amp; mentor squads.</p>
+            <p class="mt-3 text-sm text-gray-600">Oversees technical development and ensures innovative, reliable solutions. Leads study groups and technical workshops.</p>
             <div class="mt-4 flex items-center justify-center gap-3">
-              <a class="p-2 rounded-md" href="https://github.com/anjalimehta" target="_blank" aria-label="Anjali GitHub"><svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12.014c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"/></svg></a>
-              <a class="p-2 rounded-md" href="https://www.linkedin.com/in/anjalimehta" target="_blank" aria-label="Anjali LinkedIn"><svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.206v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433c-.945 0-1.71-.765-1.71-1.71s.765-1.71 1.71-1.71 1.71.765 1.71 1.71-.765 1.71-1.71 1.71zM6.61 16.338H4.064v-8.59h2.546v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z"/></svg></a>
+              <a class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 text-sm" href="mailto:ayushverma593773@gmail.com">✉️ Email</a>
+              <span class="badge">Java</span>
             </div>
-            <button class="mt-4 inline-block px-4 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="anjali">View Profile</button>
+            <div class="mt-4 flex items-center justify-center gap-3">
+              <a class="p-2 rounded-md text-sm" href="https://github.com/ayush-verma-004" target="_blank" aria-label="Ayush GitHub">GitHub</a>
+              <a class="p-2 rounded-md text-sm" href="https://www.linkedin.com/in/ayush-verma-102120295" target="_blank" aria-label="Ayush LinkedIn">LinkedIn</a>
+            </div>
+            <div class="mt-4">
+              <button class="inline-block px-5 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="ayush">View Profile</button>
+            </div>
           </article>
 
-          <!-- 4 Vikram -->
-          <article class="bg-white rounded-2xl p-6 text-center card-hover reveal-hidden" data-reveal data-person="vikram">
-            <img class="w-32 h-32 rounded-full mx-auto shadow-lg" src="https://ui-avatars.com/api/?name=Vikram+Singh&background=2f8d46&color=fff&size=256" alt="Vikram Singh">
-            <h3 class="mt-4 text-xl font-bold">Vikram Singh</h3>
-            <p class="text-sm text-gray-500">Events Head</p>
-            <p class="mt-3 text-sm text-gray-600">Logistics &amp; campus events — organizes workshops, contests &amp; talks.</p>
+          <article class="bg-white rounded-2xl p-8 text-center card-hover" data-person="himanshu">
+            <img class="w-40 h-40 rounded-full mx-auto shadow-lg object-cover" src="https://ui-avatars.com/api/?name=Himanshu+Raj&background=2f8d46&color=fff&size=512" alt="Himanshu Raj — PR Head" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Himanshu+Raj&background=2f8d46&color=fff'">
+            <h3 class="mt-4 text-2xl font-bold">Himanshu Raj</h3>
+            <p class="text-sm text-gray-500">Public Relations & Outreach Head</p>
+            <p class="mt-3 text-sm text-gray-600">Builds relationships with student groups, industry and media. Communicates the organisation's mission to the public.</p>
             <div class="mt-4 flex items-center justify-center gap-3">
-              <a class="p-2 rounded-md" href="https://github.com/vikramsingh" target="_blank" aria-label="Vikram GitHub"><svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12.014c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"/></svg></a>
-              <a class="p-2 rounded-md" href="https://www.linkedin.com/in/vikramsingh" target="_blank" aria-label="Vikram LinkedIn"><svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.206v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433c-.945 0-1.71-.765-1.71-1.71s.765-1.71 1.71-1.71 1.71.765 1.71 1.71-.765 1.71-1.71 1.71zM6.61 16.338H4.064v-8.59h2.546v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z"/></svg></a>
+              <a class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 text-sm" href="mailto:himanshu.raj@example.com">✉️ Email</a>
+              <span class="badge">PR • Events</span>
             </div>
-            <button class="mt-4 inline-block px-4 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="vikram">View Profile</button>
+            <div class="mt-4 flex items-center justify-center gap-3">
+              <a class="p-2 rounded-md text-sm" href="#" target="_blank" aria-label="Himanshu GitHub">GitHub</a>
+              <a class="p-2 rounded-md text-sm" href="#" target="_blank" aria-label="Himanshu LinkedIn">LinkedIn</a>
+            </div>
+            <div class="mt-4">
+              <button class="inline-block px-5 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="himanshu">View Profile</button>
+            </div>
           </article>
 
-          <!-- 5 Sameer -->
-          <article class="bg-white rounded-2xl p-6 text-center card-hover reveal-hidden" data-reveal data-person="sameer">
-            <img class="w-32 h-32 rounded-full mx-auto shadow-lg" src="https://ui-avatars.com/api/?name=Sameer+Khan&background=2f8d46&color=fff&size=256" alt="Sameer Khan">
-            <h3 class="mt-4 text-xl font-bold">Sameer Khan</h3>
-            <p class="text-sm text-gray-500">Web Dev Lead</p>
-            <p class="mt-3 text-sm text-gray-600">Frontend &amp; UX — builds the website and teaches web stacks.</p>
+          <article class="bg-white rounded-2xl p-8 text-center card-hover" data-person="kaif">
+            <img class="w-40 h-40 rounded-full mx-auto shadow-lg object-cover" src="https://ui-avatars.com/api/?name=Md+Kaif&background=2f8d46&color=fff&size=512" alt="Md Kaif — Social Media Head" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Md+Kaif&background=2f8d46&color=fff'">
+            <h3 class="mt-4 text-2xl font-bold">Md Kaif</h3>
+            <p class="text-sm text-gray-500">Social Media & Promotion Head</p>
+            <p class="mt-3 text-sm text-gray-600">Drives engagement and amplifies brand presence across digital platforms and handles creative campaigns.</p>
             <div class="mt-4 flex items-center justify-center gap-3">
-              <a class="p-2 rounded-md" href="https://github.com/sameerkhan" target="_blank" aria-label="Sameer GitHub"><svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12.014c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"/></svg></a>
-              <a class="p-2 rounded-md" href="https://www.linkedin.com/in/sameerkhan" target="_blank" aria-label="Sameer LinkedIn"><svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.206v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433c-.945 0-1.71-.765-1.71-1.71s.765-1.71 1.71-1.71 1.71.765 1.71 1.71-.765 1.71-1.71 1.71zM6.61 16.338H4.064v-8.59h2.546v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z"/></svg></a>
+              <a class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 text-sm" href="mailto:md.kaif@example.com">✉️ Email</a>
+              <span class="badge">Social • Growth</span>
             </div>
-            <button class="mt-4 inline-block px-4 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="sameer">View Profile</button>
+            <div class="mt-4 flex items-center justify-center gap-3">
+              <a class="p-2 rounded-md text-sm" href="#" target="_blank" aria-label="Kaif GitHub">GitHub</a>
+              <a class="p-2 rounded-md text-sm" href="#" target="_blank" aria-label="Kaif LinkedIn">LinkedIn</a>
+            </div>
+            <div class="mt-4">
+              <button class="inline-block px-5 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="kaif">View Profile</button>
+            </div>
           </article>
 
-          <!-- 6 Isha -->
-          <article class="bg-white rounded-2xl p-6 text-center card-hover reveal-hidden" data-reveal data-person="isha">
-            <img class="w-32 h-32 rounded-full mx-auto shadow-lg" src="https://ui-avatars.com/api/?name=Isha+Gupta&background=2f8d46&color=fff&size=256" alt="Isha Gupta">
-            <h3 class="mt-4 text-xl font-bold">Isha Gupta</h3>
-            <p class="text-sm text-gray-500">AI/ML Lead</p>
-            <p class="mt-3 text-sm text-gray-600">Machine Learning &amp; Data — runs ML study groups &amp; projects.</p>
+          <article class="bg-white rounded-2xl p-8 text-center card-hover" data-person="anandam">
+            <img class="w-40 h-40 rounded-full mx-auto shadow-lg object-cover" src="https://ui-avatars.com/api/?name=Anandam&background=2f8d46&color=fff&size=512" alt="Anandam — Design Head" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Anandam&background=2f8d46&color=fff'">
+            <h3 class="mt-4 text-2xl font-bold">Anandam</h3>
+            <p class="text-sm text-gray-500">Design & Creative Head</p>
+            <p class="mt-3 text-sm text-gray-600">Crafts visually compelling and innovative designs to elevate the brand and event experiences.</p>
             <div class="mt-4 flex items-center justify-center gap-3">
-              <a class="p-2 rounded-md" href="https://github.com/ishagupta" target="_blank" aria-label="Isha GitHub"><svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12.014c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"/></svg></a>
-              <a class="p-2 rounded-md" href="https://www.linkedin.com/in/ishagupta" target="_blank" aria-label="Isha LinkedIn"><svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.206v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433c-.945 0-1.71-.765-1.71-1.71s.765-1.71 1.71-1.71 1.71.765 1.71 1.71-.765 1.71-1.71 1.71zM6.61 16.338H4.064v-8.59h2.546v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z"/></svg></a>
+              <a class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 text-sm" href="mailto:anandam@example.com">✉️ Email</a>
+              <span class="badge">Design • UI</span>
             </div>
-            <button class="mt-4 inline-block px-4 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="isha">View Profile</button>
+            <div class="mt-4 flex items-center justify-center gap-3">
+              <a class="p-2 rounded-md text-sm" href="#" target="_blank" aria-label="Anandam GitHub">GitHub</a>
+              <a class="p-2 rounded-md text-sm" href="#" target="_blank" aria-label="Anandam LinkedIn">LinkedIn</a>
+            </div>
+            <div class="mt-4">
+              <button class="inline-block px-5 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="anandam">View Profile</button>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-2xl p-8 text-center card-hover" data-person="bhumi">
+            <img class="w-40 h-40 rounded-full mx-auto shadow-lg object-cover" src="https://ui-avatars.com/api/?name=Bhumi&background=2f8d46&color=fff&size=512" alt="Bhumi — Events & Operations Head" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Bhumi&background=2f8d46&color=fff'">
+            <h3 class="mt-4 text-2xl font-bold">Bhumi</h3>
+            <p class="text-sm text-gray-500">Event & Operations Head</p>
+            <p class="mt-3 text-sm text-gray-600">Manages seamless execution of events and operational logistics, volunteer coordination and runbooks.</p>
+            <div class="mt-4 flex items-center justify-center gap-3">
+              <a class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 text-sm" href="mailto:bhumi@example.com">✉️ Email</a>
+              <span class="badge">Ops • Logistics</span>
+            </div>
+            <div class="mt-4 flex items-center justify-center gap-3">
+              <a class="p-2 rounded-md text-sm" href="#" target="_blank" aria-label="Bhumi GitHub">GitHub</a>
+              <a class="p-2 rounded-md text-sm" href="#" target="_blank" aria-label="Bhumi LinkedIn">LinkedIn</a>
+            </div>
+            <div class="mt-4">
+              <button class="inline-block px-5 py-2 bg-[color:var(--brand)] text-white rounded-md view-profile" data-person="bhumi">View Profile</button>
+            </div>
           </article>
 
         </div>
-
       </div>
     </section>
 
-    <!-- quick contact CTA -->
+    <!-- Contributors (kept unchanged) -->
+    <section id="contributors" class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-4">Contributors</h2>
+        <p class="text-center text-gray-600 mb-8">Students and alumni who contributed code, docs, designs, or helped organise events.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+          <!-- sample contributor -->
+          <button class="contrib-card bg-white rounded-2xl p-4 text-center shadow-sm hover:shadow-lg focus-ring" data-name="Akash Kumar" data-role="Frontend" data-badges="Code,Design" data-github="https://github.com/akashkumar" data-linkedin="https://www.linkedin.com/in/akashkumar">
+            <img src="https://ui-avatars.com/api/?name=Akash+Kumar&background=2f8d46&color=fff&size=256" alt="Akash Kumar" class="w-20 h-20 rounded-full mx-auto shadow">
+            <div class="mt-3 font-semibold">Akash Kumar</div>
+            <div class="text-sm text-gray-500">Frontend</div>
+          </button>
+          <!-- add other contributors as before -->
+        </div>
+      </div>
+
+      <!-- contributor modal -->
+      <div id="contribModal" class="fixed inset-0 z-60 hidden items-center justify-center bg-black/50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 relative">
+          <button id="contribClose" class="absolute right-4 top-4 rounded-md p-2 text-gray-700 focus-ring" aria-label="Close">✕</button>
+          <div id="contribContent"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick contact CTA -->
     <section class="bg-[color:var(--brand)] text-white py-8">
       <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
@@ -183,7 +248,7 @@
 
   </main>
 
-  <!-- modal for profile -->
+  <!-- profile modal -->
   <div id="profileModal" class="fixed inset-0 z-60 hidden items-center justify-center bg-black/50 p-4">
     <div class="bg-white rounded-2xl max-w-lg w-full p-6 relative">
       <button id="modalClose" class="absolute right-4 top-4 rounded-md p-2 text-gray-700 focus-ring" aria-label="Close profile">✕</button>
@@ -197,7 +262,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <h3 class="text-xl font-bold">GFG Student Chapter TIT&amp;S</h3>
-          <p class="mt-2 text-gray-400">The Technological Institute of Textile &amp; Sciences, Bhiwani</p>
+          <p class="mt-2 text-gray-400">Technocrats Institute of Technology &amp; Sciences, Bhopal</p>
         </div>
         <div>
           <h3 class="font-bold mb-2">Quick Links</h3>
@@ -210,8 +275,8 @@
         <div>
           <h3 class="font-bold mb-2">Connect With Us</h3>
           <div class="flex space-x-4 mt-2">
-            <a href="#" class="text-gray-400 hover:text-white" aria-label="LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.206v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433c-.945 0-1.71-.765-1.71-1.71s.765-1.71 1.71-1.71 1.71.765 1.71 1.71-.765 1.71-1.71 1.71zM6.61 16.338H4.064v-8.59h2.546v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z"></path></svg></a>
-            <a href="#" class="text-gray-400 hover:text-white" aria-label="GitHub"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12.014c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"></path></svg></a>
+            <a href="#" class="text-gray-400 hover:text-white" aria-label="LinkedIn">LinkedIn</a>
+            <a href="#" class="text-gray-400 hover:text-white" aria-label="GitHub">GitHub</a>
           </div>
         </div>
       </div>
@@ -223,46 +288,221 @@
   </footer>
 
   <script>
-    // menu toggle identical to landing
+    // defensive menu toggle
     (function(){
-      const btn = document.getElementById('menuBtn');
-      const mobile = document.getElementById('mobileMenu');
-      const openIcon = document.getElementById('menuOpen');
-      const closeIcon = document.getElementById('menuClose');
-      if(btn) btn.addEventListener('click', ()=>{ const expanded = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!expanded)); mobile.classList.toggle('hidden'); openIcon.classList.toggle('hidden'); closeIcon.classList.toggle('hidden'); });
+      try {
+        const btn = document.getElementById('menuBtn');
+        const mobile = document.getElementById('mobileMenu');
+        const openIcon = document.getElementById('menuOpen');
+        const closeIcon = document.getElementById('menuClose');
+        if(btn) btn.addEventListener('click', ()=>{ const expanded = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!expanded)); mobile.classList.toggle('hidden'); openIcon.classList.toggle('hidden'); closeIcon.classList.toggle('hidden'); });
+      } catch(e){ console.error('menu toggle error', e); }
     })();
 
-    // reveal on scroll
+    // reveal-on-scroll (applies animation only if supported)
     (function(){
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const revealEls = document.querySelectorAll('[data-reveal]');
-      if(prefersReduced){ revealEls.forEach(el=>el.classList.add('reveal-visible')); return; }
-      const obs = new IntersectionObserver((entries, observer)=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('reveal-visible'); entry.target.classList.remove('reveal-hidden'); observer.unobserve(entry.target); } }); }, { rootMargin:'0px 0px -8% 0px', threshold:0.08 });
-      revealEls.forEach(el=>{ el.classList.add('reveal-hidden'); obs.observe(el); });
+      try {
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const grid = document.getElementById('teamGrid');
+        const revealTargets = Array.from(document.querySelectorAll('[data-person]'));
+
+        // if IntersectionObserver isn't available, don't hide things
+        if(!('IntersectionObserver' in window) || prefersReduced){
+          document.documentElement.classList.add('no-js-reveals');
+          return;
+        }
+
+        // add 'reveal-hidden' class so elements will animate from hidden -> visible
+        revealTargets.forEach(el => el.classList.add('reveal-hidden'));
+
+        const obs = new IntersectionObserver((entries, observer)=>{
+          entries.forEach(entry=>{
+            if(entry.isIntersecting){
+              entry.target.classList.add('reveal-visible');
+              entry.target.classList.remove('reveal-hidden');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin:'0px 0px -8% 0px', threshold:0.08 });
+
+        revealTargets.forEach(el => obs.observe(el));
+      } catch(err){
+        // on any error, un-hide everything so page remains usable
+        document.documentElement.classList.add('no-js-reveals');
+        console.error('reveal error', err);
+      }
     })();
 
-    // Profile modal data and handlers
+    // team profile modal data + handlers (defensive)
     (function(){
-      const people = {
-        priya: { name:'Priya Patel', role:'President', img:'https://ui-avatars.com/api/?name=Priya+Patel&background=2f8d46&color=fff&size=512', bio:'Final-year CSE student. Leads outreach, partnerships, and strategic planning. Loves mentoring juniors and organising cross-college events.', github:'https://github.com/priyapatel', linkedin:'https://www.linkedin.com/in/priyapatel' },
-        rohan: { name:'Rohan Verma', role:'Vice President', img:'https://ui-avatars.com/api/?name=Rohan+Verma&background=2f8d46&color=fff&size=512', bio:'Electronics student focused on growth initiatives, sponsorships and student mentorship programs.', github:'https://github.com/rohanverma', linkedin:'https://www.linkedin.com/in/rohanverma' },
-        anjali: { name:'Anjali Mehta', role:'Technical Head', img:'https://ui-avatars.com/api/?name=Anjali+Mehta&background=2f8d46&color=fff&size=512', bio:'Backend & DevOps enthusiast — runs technical workshops, code reviews and infrastructure for club projects.', github:'https://github.com/anjalimehta', linkedin:'https://www.linkedin.com/in/anjalimehta' },
-        vikram: { name:'Vikram Singh', role:'Events Head', img:'https://ui-avatars.com/api/?name=Vikram+Singh&background=2f8d46&color=fff&size=512', bio:'Organizes campus events, logistics and speaker coordination. Passionate about event design and community engagement.', github:'https://github.com/vikramsingh', linkedin:'https://www.linkedin.com/in/vikramsingh' },
-        sameer: { name:'Sameer Khan', role:'Web Dev Lead', img:'https://ui-avatars.com/api/?name=Sameer+Khan&background=2f8d46&color=fff&size=512', bio:'Frontend & UX engineer. Builds the club website and leads frontend study groups.', github:'https://github.com/sameerkhan', linkedin:'https://www.linkedin.com/in/sameerkhan' },
-        isha: { name:'Isha Gupta', role:'AI/ML Lead', img:'https://ui-avatars.com/api/?name=Isha+Gupta&background=2f8d46&color=fff&size=512', bio:'Machine Learning & Data lead — mentors ML projects and runs study groups for beginners.', github:'https://github.com/ishagupta', linkedin:'https://www.linkedin.com/in/ishagupta' }
-      };
+      try {
+        const people = {
+          farid: {
+            name: 'Md Farid',
+            role: 'Leader',
+            pronouns: 'He/Him',
+            tenure: '2025',
+            img: 'https://ui-avatars.com/api/?name=Md+Farid&background=2f8d46&color=fff&size=512',
+            email: 'md.farid@example.com',
+            skills: ['Leadership','Outreach','Strategy'],
+            bio: 'Guides the team with vision and strategy to achieve collective goals. Builds partnerships and mentors the core committee.',
+            github: '#',
+            linkedin: '#',
+            projects: ['Partnership drive', 'Mentorship squad']
+          },
+          ayush: {
+            name: 'Ayush Verma',
+            role: 'Technical Head',
+            pronouns: 'He/Him',
+            tenure: '2025',
+            img: 'one.webp',
+            email: 'ayushverma593773@gmail.com',
+            skills: ['Spring Boot','Java','Hazelcast'],
+            bio: 'Oversees technical development and ensures innovative, reliable solutions. Leads study groups and technical workshops.',
+            github: 'https://github.com/ayush-verma-004',
+            linkedin: 'https://www.linkedin.com/in/ayush-verma-102120295',
+            projects: ['Helixcare', 'Bootcamp curriculum']
+          },
+          himanshu: {
+            name: 'Himanshu Raj',
+            role: 'Public Relations & Outreach Head',
+            pronouns: 'He/Him',
+            tenure: '2025',
+            img: 'https://ui-avatars.com/api/?name=Himanshu+Raj&background=2f8d46&color=fff&size=512',
+            email: 'himanshu.raj@example.com',
+            skills: ['PR','Communications','Events'],
+            bio: "Builds relationships with student groups, industry and media. Communicates the organisation's mission to the public.",
+            github: '#',
+            linkedin: '#',
+            projects: ['Media kit', 'Speaker outreach']
+          },
+          kaif: {
+            name: 'Md Kaif',
+            role: 'Social Media & Promotion Head',
+            pronouns: 'He/Him',
+            tenure: '2025',
+            img: 'https://ui-avatars.com/api/?name=Md+Kaif&background=2f8d46&color=fff&size=512',
+            email: 'md.kaif@example.com',
+            skills: ['Social Growth','Content','Campaigns'],
+            bio: 'Drives engagement and amplifies brand presence across digital platforms and handles creative campaigns.',
+            github: '#',
+            linkedin: '#',
+            projects: ['Campaign - Fall 2025']
+          },
+          anandam: {
+            name: 'Anandam',
+            role: 'Design & Creative Head',
+            pronouns: 'They/Them',
+            tenure: '2025',
+            img: 'https://ui-avatars.com/api/?name=Anandam&background=2f8d46&color=fff&size=512',
+            email: 'anandam@example.com',
+            skills: ['UI/UX','Illustration','Brand'],
+            bio: 'Crafts visually compelling and innovative designs to elevate the brand and event experiences.',
+            github: '#',
+            linkedin: '#',
+            projects: ['Brand refresh', 'Event graphics']
+          },
+          bhumi: {
+            name: 'Bhumi',
+            role: 'Event & Operations Head',
+            pronouns: 'She/Her',
+            tenure: '2025',
+            img: 'https://ui-avatars.com/api/?name=Bhumi&background=2f8d46&color=fff&size=512',
+            email: 'bhumi@example.com',
+            skills: ['Logistics','Ops','Volunteer management'],
+            bio: 'Manages seamless execution of events and operational logistics, volunteer coordination and runbooks.',
+            github: '#',
+            linkedin: '#',
+            projects: ['Event playbooks']
+          }
+        };
 
-      const modal = document.getElementById('profileModal');
-      const modalContent = document.getElementById('modalContent');
-      const closeBtn = document.getElementById('modalClose');
+        const modal = document.getElementById('profileModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeBtn = document.getElementById('modalClose');
 
-      function openProfile(key){ const p = people[key]; if(!p) return; modalContent.innerHTML = `\n        <div class=\"flex gap-4 items-center\">\n          <img src=\"${p.img}\" class=\"w-28 h-28 rounded-full shadow-lg\" alt=\"${p.name}\">\n          <div>\n            <h3 class=\"text-xl font-bold\">${p.name}</h3>\n            <p class=\"text-sm text-gray-500\">${p.role}</p>\n            <p class=\"mt-3 text-sm text-gray-700\">${p.bio}</p>\n            <div class=\"mt-4 flex gap-3\">\n              <a href=\"${p.github}\" target=\"_blank\" class=\"px-3 py-2 bg-gray-100 rounded-md text-sm\">GitHub</a>\n              <a href=\"${p.linkedin}\" target=\"_blank\" class=\"px-3 py-2 bg-blue-50 rounded-md text-sm text-blue-700\">LinkedIn</a>\n            </div>\n          </div>\n        </div>\n      `; modal.classList.remove('hidden'); modal.classList.add('flex'); modal.querySelector('.focus-ring')?.focus(); }
+        function openProfile(key){
+          const p = people[key];
+          if(!p) return;
+          modalContent.innerHTML = `
+            <div class="flex flex-col sm:flex-row gap-4">
+              <img src="${p.img}" class="w-32 h-32 rounded-full shadow-lg object-cover" alt="${p.name}" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}&background=2f8d46&color=fff'">
+              <div>
+                <h3 class="text-2xl font-bold">${p.name}</h3>
+                <p class="text-sm text-gray-500">${p.role} • <span class="small-meta">${p.pronouns}</span></p>
+                <p class="mt-3 text-sm text-gray-700">${p.bio}</p>
 
-      document.querySelectorAll('.view-profile').forEach(btn=> btn.addEventListener('click', (e)=>{ const key = e.currentTarget.getAttribute('data-person'); openProfile(key); }));
-      closeBtn.addEventListener('click', ()=>{ modal.classList.add('hidden'); modal.classList.remove('flex'); });
-      modal.addEventListener('click', (e)=>{ if(e.target === modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); } });
-      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') { if(!modal.classList.contains('hidden')){ modal.classList.add('hidden'); modal.classList.remove('flex'); } } });
+                <div class="mt-4 flex flex-wrap gap-2">
+                  ${p.skills.map(s=>`<span class="badge">${s}</span>`).join(' ')}
+                </div>
 
+                <div class="mt-4 flex flex-wrap gap-3">
+                  <a href="mailto:${p.email}" class="px-3 py-2 bg-gray-100 rounded-md text-sm">Email</a>
+                  <a href="${p.github}" target="_blank" class="px-3 py-2 bg-gray-100 rounded-md text-sm">GitHub</a>
+                  <a href="${p.linkedin}" target="_blank" class="px-3 py-2 bg-blue-50 rounded-md text-sm text-blue-700">LinkedIn</a>
+                </div>
+
+                <div class="mt-4">
+                  <h4 class="font-semibold">Highlights</h4>
+                  <ul class="mt-2 text-sm text-gray-700 space-y-1">
+                    ${p.projects.map(pr=>`<li>• ${pr}</li>`).join('')}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          `;
+          modal.classList.remove('hidden'); modal.classList.add('flex');
+          modal.querySelector('a')?.focus();
+        }
+
+        document.querySelectorAll('.view-profile').forEach(btn=> btn.addEventListener('click', (e)=>{ const key = e.currentTarget.getAttribute('data-person'); openProfile(key); }));
+        closeBtn.addEventListener('click', ()=>{ modal.classList.add('hidden'); modal.classList.remove('flex'); });
+        modal.addEventListener('click', (e)=>{ if(e.target === modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); } });
+        document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') { if(!modal.classList.contains('hidden')){ modal.classList.add('hidden'); modal.classList.remove('flex'); } } });
+      } catch(err){
+        console.error('profile modal error', err);
+      }
+    })();
+
+    // contributors modal handlers (delegated, defensive)
+    (function(){
+      try {
+        const contribModal = document.getElementById('contribModal');
+        const contribContent = document.getElementById('contribContent');
+        const contribClose = document.getElementById('contribClose');
+
+        function openContrib(target){
+          const name = target.getAttribute('data-name');
+          const role = target.getAttribute('data-role');
+          const badges = target.getAttribute('data-badges');
+          const github = target.getAttribute('data-github');
+          const linkedin = target.getAttribute('data-linkedin');
+          contribContent.innerHTML = `
+            <div class="flex gap-4 items-start">
+              <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=2f8d46&color=fff&size=256" class="w-20 h-20 rounded-full shadow-lg" alt="${name}">
+              <div>
+                <h3 class="text-xl font-bold">${name}</h3>
+                <p class="text-sm text-gray-500">${role}</p>
+                <p class="mt-3 text-sm text-gray-700">Contributed: ${badges}</p>
+                <div class="mt-4 flex gap-3">
+                  <a href="${github}" target="_blank" class="px-3 py-2 bg-gray-100 rounded-md text-sm">GitHub</a>
+                  <a href="${linkedin}" target="_blank" class="px-3 py-2 bg-blue-50 rounded-md text-sm text-blue-700">LinkedIn</a>
+                </div>
+              </div>
+            </div>
+          `;
+          contribModal.classList.remove('hidden'); contribModal.classList.add('flex');
+        }
+
+        document.addEventListener('click', (e)=>{
+          const c = e.target.closest('.contrib-card');
+          if(c){ openContrib(c); }
+        });
+
+        contribClose.addEventListener('click', ()=>{ contribModal.classList.add('hidden'); contribModal.classList.remove('flex'); });
+        contribModal.addEventListener('click', (e)=>{ if(e.target === contribModal){ contribModal.classList.add('hidden'); contribModal.classList.remove('flex'); } });
+        document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ if(!contribModal.classList.contains('hidden')){ contribModal.classList.add('hidden'); contribModal.classList.remove('flex'); } } });
+      } catch(e){ console.error('contrib handlers error', e); }
     })();
   </script>
 </body>
